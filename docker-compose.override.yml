@@ -1,0 +1,11 @@
+
+
+services:
+  api:
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./app:/app   # Montar código local para hot-reload
+    environment:
+      - ENV=development
+    restart: unless-stopped   # En dev, si lo paro manual, no quiero que vuelva a arrancar solo

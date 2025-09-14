@@ -19,6 +19,11 @@ class Location(BaseModel):
 # Base temporal en memoria
 locations: List[Location] = []
 
+
+@app.get("/health")
+def health():
+    return {"status": "ok"}
+
 # --- ENDPOINTS ---
 @app.get("/", tags=["Health"])
 def root():
