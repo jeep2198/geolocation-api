@@ -25,3 +25,16 @@ jobs:
         with:
           push: true
           tags: user/app:latest
+
+jobs:
+  publish_images:
+    runs-on: ubuntu-latest
+    steps:
+    - name: checkout
+      uses: actions/checkout@v4
+    - name: build image
+      run: docker build ./api/ -t ${{ secrets.DOCKERHUB_USERNAME }}/api-geolocation:latest
+    - name: push image to docker hub
+      run: |
+        docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_TOKEN }}
+        docker push ${{ secrets.DOCKERHUB_USERNAME }}/api-geolocation:latest
