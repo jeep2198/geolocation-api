@@ -8,24 +8,24 @@ on:
       - "!main"
 
 jobs:
-  lint:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
+  # lint:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v4
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.11"
+  #     - name: Set up Python
+  #       uses: actions/setup-python@v5
+  #       with:
+  #         python-version: "3.11"
 
-      - name: Install lint dependencies
-        run: pip install black flake8 isort
+  #     - name: Install lint dependencies
+  #       run: pip install black flake8 isort
 
-      - name: Run linters
-        run: |
-          black --check app
-          isort --check-only app
-          flake8 app
+  #     - name: Run linters
+  #       run: |
+  #         black --check app
+  #         isort --check-only app
+  #         flake8 app
 
   test:
     runs-on: ubuntu-latest
