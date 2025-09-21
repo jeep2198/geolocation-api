@@ -17,12 +17,13 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
-      - name: Build Docker image (no push)
+      - name: Build Docker image (no push, load locally)
         uses: docker/build-push-action@v5
         with:
           context: .
           file: docker/Dockerfile
           push: false
+          load: true   # 👈 necesario para que Trivy la vea en local
           tags: geolocation-api:ci
 
       - name: Scan image with Trivy
@@ -30,5 +31,5 @@ jobs:
         with:
           image-ref: geolocation-api:ci
           format: table
-          exit-code: 1 # Falla si hay vulnerabilidades críticas
+          exit-code: 1   # Falla si hay CRITICAL/HIGH
           severity: CRITICAL,HIGH
