@@ -12,13 +12,14 @@ RUN addgroup --system appgroup && adduser --system appuser --ingroup appgroup
 # Directorio de trabajo
 WORKDIR /app
 
+
 # Instalar dependencias
 COPY app/requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Copiar el código de la aplicación
 COPY app/ .
-
+RUN pip install --upgrade pip setuptools
 # Cambiar permisos
 RUN chown -R appuser:appgroup /app
 USER appuser
